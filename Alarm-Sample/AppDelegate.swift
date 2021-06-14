@@ -13,7 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
             if granted {
@@ -24,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // バックグラウンドからアクティブな状態に遷移されたときに呼ばれる。
         UNUserNotificationCenter.current().getDeliveredNotifications { (notifications: [UNNotification]) in
 //            for notification in notifications {
 //                _ = AlarmVC.shared.getAlarm(from: notification.request.identifier)
@@ -52,19 +52,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner, .sound])
         let uuid = notification.request.identifier
 //        _ = AlarmVC.shared.getAlarm(from: uuid)
-        NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: nil)
+        NotificationCenter.default.post(name: .notificationIdentifier, object: nil)
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
         let identifier = response.actionIdentifier
         if identifier == "snooze" {
-            let snoozeAction = UNNotificationAction(identifier: "snooze", title: "Snooze 5 Minutes", options: [])
+            let snoozeAction = UNNotificationAction(identifier: identifier, title: "Snooze 5 Minutes", options: [])
             let noAction = UNNotificationAction(identifier: "stop", title: "stop", options: [])
-            let alarmCategory = UNNotificationCategory(identifier: "alarmCategory", actions: [snoozeAction, noAction], intentIdentifiers: [], options: [])
+            let alarmCategory = UNNotificationCategory(identifier: "alarmCategory",
+                                                       actions: [snoozeAction, noAction],
+                                                       intentIdentifiers: [],
+                                                       options: [])
             UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
             let content = UNMutableNotificationContent()
             content.title = "Snooze"
@@ -80,8 +87,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
         let uuid = response.notification.request.identifier
 //        _ = AlarmVC.shared.getAlarm(from: uuid)
-        NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: nil)
+        NotificationCenter.default.post(name: .notificationIdentifier, object: nil)
         completionHandler()
+    }
+    
+}
+
+private extension Notification.Name {
+    
+    static var notificationIdentifier: Self {
+        return Notification.Name("NotificationIdentifier")
     }
     
 }

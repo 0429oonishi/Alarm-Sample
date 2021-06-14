@@ -1,5 +1,5 @@
 //
-//  AlarmTimes.swift
+//  AlarmTime.swift
 //  Alarm-Sample
 //
 //  Created by 大西玲音 on 2021/06/14.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class AlarmTimes: NSObject, NSCoding {
+final class AlarmTime: NSObject, NSCoding {
     
     var date: Date
     var uuidString: String

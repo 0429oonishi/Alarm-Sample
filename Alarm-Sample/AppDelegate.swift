@@ -26,10 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         UNUserNotificationCenter.current().getDeliveredNotifications { (notifications: [UNNotification]) in
-//            for notification in notifications {
-//                _ = AlarmVC.shared.getAlarm(from: notification.request.identifier)
-//                NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: nil)
-//            }
+            for notification in notifications {
+                AlarmViewController.shared.getAlarm(from: notification.request.identifier)
+                NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: nil)
+            }
         }
     }
     
@@ -61,7 +61,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             completionHandler([.alert, .sound])
         }
         let uuid = notification.request.identifier
-//        _ = AlarmVC.shared.getAlarm(from: uuid)
+        AlarmViewController.shared.getAlarm(from: uuid)
         NotificationCenter.default.post(name: .notificationIdentifier, object: nil)
     }
     
@@ -90,7 +90,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             }
         }
         let uuid = response.notification.request.identifier
-//        _ = AlarmVC.shared.getAlarm(from: uuid)
+        AlarmViewController.shared.getAlarm(from: uuid)
         NotificationCenter.default.post(name: .notificationIdentifier, object: nil)
         completionHandler()
     }

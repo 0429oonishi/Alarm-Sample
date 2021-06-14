@@ -19,6 +19,15 @@
 		AB1541DF2676F106006E30A6 /* AlarmTimeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB1541DD2676F106006E30A6 /* AlarmTimeTableViewCell.xib */; };
 		AB1541E12676F9D4006E30A6 /* AlarmAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1541E02676F9D4006E30A6 /* AlarmAddViewController.swift */; };
 		AB1541E32676FD79006E30A6 /* TimeManageer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1541E22676FD79006E30A6 /* TimeManageer.swift */; };
+		AB1541EB267712ED006E30A6 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1541EA267712ED006E30A6 /* UITableViewCell+Extension.swift */; };
+		AB1541EE26771503006E30A6 /* AlarmAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1541EC26771503006E30A6 /* AlarmAddTableViewCell.swift */; };
+		AB1541EF26771503006E30A6 /* AlarmAddTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB1541ED26771503006E30A6 /* AlarmAddTableViewCell.xib */; };
+		AB1541F2267718B7006E30A6 /* AlarmSnoozeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1541F0267718B7006E30A6 /* AlarmSnoozeTableViewCell.swift */; };
+		AB1541F3267718B7006E30A6 /* AlarmSnoozeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB1541F1267718B7006E30A6 /* AlarmSnoozeTableViewCell.xib */; };
+		AB1541F926771CA9006E30A6 /* AlarmRepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1541F826771CA9006E30A6 /* AlarmRepeatViewController.swift */; };
+		AB1541FB26771CB1006E30A6 /* AlarmAddLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1541FA26771CB1006E30A6 /* AlarmAddLabelViewController.swift */; };
+		AB15420226773B23006E30A6 /* AlarmDeleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB15420026773B23006E30A6 /* AlarmDeleteTableViewCell.swift */; };
+		AB15420326773B23006E30A6 /* AlarmDeleteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB15420126773B23006E30A6 /* AlarmDeleteTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +45,15 @@
 		AB1541DD2676F106006E30A6 /* AlarmTimeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmTimeTableViewCell.xib; sourceTree = "<group>"; };
 		AB1541E02676F9D4006E30A6 /* AlarmAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmAddViewController.swift; sourceTree = "<group>"; };
 		AB1541E22676FD79006E30A6 /* TimeManageer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManageer.swift; sourceTree = "<group>"; };
+		AB1541EA267712ED006E30A6 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
+		AB1541EC26771503006E30A6 /* AlarmAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmAddTableViewCell.swift; sourceTree = "<group>"; };
+		AB1541ED26771503006E30A6 /* AlarmAddTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmAddTableViewCell.xib; sourceTree = "<group>"; };
+		AB1541F0267718B7006E30A6 /* AlarmSnoozeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSnoozeTableViewCell.swift; sourceTree = "<group>"; };
+		AB1541F1267718B7006E30A6 /* AlarmSnoozeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmSnoozeTableViewCell.xib; sourceTree = "<group>"; };
+		AB1541F826771CA9006E30A6 /* AlarmRepeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepeatViewController.swift; sourceTree = "<group>"; };
+		AB1541FA26771CB1006E30A6 /* AlarmAddLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmAddLabelViewController.swift; sourceTree = "<group>"; };
+		AB15420026773B23006E30A6 /* AlarmDeleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDeleteTableViewCell.swift; sourceTree = "<group>"; };
+		AB15420126773B23006E30A6 /* AlarmDeleteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmDeleteTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				AB1541DA2676F0CD006E30A6 /* NotificationName+Extension.swift */,
+				AB1541EA267712ED006E30A6 /* UITableViewCell+Extension.swift */,
 				AB1541D92676F04D006E30A6 /* Models */,
 				AB1541D82676F04A006E30A6 /* Views */,
 				AB1541D72676F043006E30A6 /* Controllers */,
@@ -86,6 +105,8 @@
 			children = (
 				AB1541D12676EE64006E30A6 /* AlarmViewController.swift */,
 				AB1541E02676F9D4006E30A6 /* AlarmAddViewController.swift */,
+				AB1541F826771CA9006E30A6 /* AlarmRepeatViewController.swift */,
+				AB1541FA26771CB1006E30A6 /* AlarmAddLabelViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -96,6 +117,12 @@
 				AB1541D32676EE68006E30A6 /* Alarm.storyboard */,
 				AB1541DC2676F106006E30A6 /* AlarmTimeTableViewCell.swift */,
 				AB1541DD2676F106006E30A6 /* AlarmTimeTableViewCell.xib */,
+				AB1541EC26771503006E30A6 /* AlarmAddTableViewCell.swift */,
+				AB1541ED26771503006E30A6 /* AlarmAddTableViewCell.xib */,
+				AB1541F0267718B7006E30A6 /* AlarmSnoozeTableViewCell.swift */,
+				AB1541F1267718B7006E30A6 /* AlarmSnoozeTableViewCell.xib */,
+				AB15420026773B23006E30A6 /* AlarmDeleteTableViewCell.swift */,
+				AB15420126773B23006E30A6 /* AlarmDeleteTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -166,10 +193,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB15420326773B23006E30A6 /* AlarmDeleteTableViewCell.xib in Resources */,
 				AB1541D42676EE68006E30A6 /* Alarm.storyboard in Resources */,
+				AB1541F3267718B7006E30A6 /* AlarmSnoozeTableViewCell.xib in Resources */,
 				AB1541CA2676E57F006E30A6 /* LaunchScreen.storyboard in Resources */,
 				AB1541DF2676F106006E30A6 /* AlarmTimeTableViewCell.xib in Resources */,
 				AB1541C72676E57F006E30A6 /* Assets.xcassets in Resources */,
+				AB1541EF26771503006E30A6 /* AlarmAddTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,10 +212,16 @@
 			files = (
 				AB1541DB2676F0CD006E30A6 /* NotificationName+Extension.swift in Sources */,
 				AB1541D22676EE64006E30A6 /* AlarmViewController.swift in Sources */,
+				AB15420226773B23006E30A6 /* AlarmDeleteTableViewCell.swift in Sources */,
 				AB1541BE2676E57B006E30A6 /* AppDelegate.swift in Sources */,
+				AB1541F2267718B7006E30A6 /* AlarmSnoozeTableViewCell.swift in Sources */,
 				AB1541E12676F9D4006E30A6 /* AlarmAddViewController.swift in Sources */,
 				AB1541E32676FD79006E30A6 /* TimeManageer.swift in Sources */,
+				AB1541EB267712ED006E30A6 /* UITableViewCell+Extension.swift in Sources */,
+				AB1541F926771CA9006E30A6 /* AlarmRepeatViewController.swift in Sources */,
+				AB1541EE26771503006E30A6 /* AlarmAddTableViewCell.swift in Sources */,
 				AB1541C02676E57B006E30A6 /* SceneDelegate.swift in Sources */,
+				AB1541FB26771CB1006E30A6 /* AlarmAddLabelViewController.swift in Sources */,
 				AB1541DE2676F106006E30A6 /* AlarmTimeTableViewCell.swift in Sources */,
 				AB1541D62676F033006E30A6 /* AlarmTimes.swift in Sources */,
 			);
@@ -256,7 +292,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -311,7 +347,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -329,7 +365,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 242KS3V77L;
 				INFOPLIST_FILE = "Alarm-Sample/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -349,7 +385,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 242KS3V77L;
 				INFOPLIST_FILE = "Alarm-Sample/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

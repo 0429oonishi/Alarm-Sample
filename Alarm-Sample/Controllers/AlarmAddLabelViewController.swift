@@ -7,27 +7,47 @@
 
 import UIKit
 
-protocol AlarmAddLabelDelegate {
-    func alarmAddLabel(labelText:AlarmAddLabelVC,text:String)
+protocol AlarmAddLabelVCDelegate: AnyObject {
+    func alarmAddLabel(labelText: AlarmAddLabelViewController, text: String)
 }
 
 final class AlarmAddLabelViewController: UIViewController {
-
+    
+    @IBOutlet private weak var textField: UITextField!
+    
+    weak var delegate: AlarmAddLabelVCDelegate?
+    var text: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        textField.clearButtonMode = .always
+        textField.returnKeyType = .done
+        textField.delegate = self
+        textField.becomeFirstResponder()
+        textField.text = text ?? ""
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if let text = textField.text, !text.isEmpty {
+            delegate?.alarmAddLabel(labelText: self, text: text)
+        }
+        
     }
-    */
+    
+}
 
+extension AlarmAddLabelViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let text = textField.text, !text.isEmpty {
+            delegate?.alarmAddLabel(labelText: self, text: text)
+            self.navigationController?.popViewController(animated: true)
+        }
+        return true
+    }
+    
 }

@@ -55,7 +55,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.banner, .sound])
+        if #available(iOS 14.0, *) {
+            completionHandler([.banner, .sound])
+        } else {
+            completionHandler([.alert, .sound])
+        }
         let uuid = notification.request.identifier
 //        _ = AlarmVC.shared.getAlarm(from: uuid)
         NotificationCenter.default.post(name: .notificationIdentifier, object: nil)
@@ -92,12 +96,3 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
 }
-
-private extension Notification.Name {
-    
-    static var notificationIdentifier: Self {
-        return Notification.Name("NotificationIdentifier")
-    }
-    
-}
-

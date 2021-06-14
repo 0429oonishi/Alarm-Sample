@@ -15,8 +15,8 @@ final class AlarmTime: NSObject, NSCoding {
     var sound: Bool
     var snooze: Bool
     var onOff: Bool
+    var weeks: [String]
     var repeatLabel: String
-    var week: [String]
     
     override init() {
         self.date = Date()
@@ -25,7 +25,7 @@ final class AlarmTime: NSObject, NSCoding {
         self.sound = true
         self.snooze = true
         self.onOff = true
-        self.week = []
+        self.weeks = []
         self.repeatLabel = "Never"
     }
     
@@ -36,7 +36,7 @@ final class AlarmTime: NSObject, NSCoding {
         aCoder.encode(self.sound, forKey: "sound")
         aCoder.encode(self.snooze, forKey: "snooze")
         aCoder.encode(self.onOff, forKey: "onOff")
-        aCoder.encode(self.week, forKey: "week")
+        aCoder.encode(self.weeks, forKey: "weeks")
         aCoder.encode(self.repeatLabel, forKey: "repeatLabel")
     }
     
@@ -47,7 +47,7 @@ final class AlarmTime: NSObject, NSCoding {
         sound = aDecoder.decodeBool(forKey: "sound")
         snooze = aDecoder.decodeBool(forKey: "snooze")
         onOff = aDecoder.decodeBool(forKey: "onOff")
-        week = aDecoder.decodeObject(forKey: "week") as! [String]
+        weeks = aDecoder.decodeObject(forKey: "weeks") as! [String]
         repeatLabel = aDecoder.decodeObject(forKey: "repeatLabel") as! String
     }
     

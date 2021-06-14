@@ -38,6 +38,8 @@ final class AlarmViewController: UIViewController {
         tableView.allowsSelection = false
         tableView.register(AlarmTimeTableViewCell.nib,
                            forCellReuseIdentifier: AlarmTimeTableViewCell.identifier)
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.reloadData()
     }
@@ -50,7 +52,6 @@ final class AlarmViewController: UIViewController {
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
     }
     
@@ -61,10 +62,10 @@ final class AlarmViewController: UIViewController {
         }
     }
     
-    private func getAlarm(from uuid: String) {
+    public func getAlarm(from uuid: String) {
         timeLoad()
         guard let alarm = alarmTimes.first(where: { $0.uuidString == uuid }) else { return }
-        if alarm.week.isEmpty {
+        if alarm.weeks.isEmpty {
             alarm.onOff = false
         }
         saveDate()
@@ -75,7 +76,7 @@ final class AlarmViewController: UIViewController {
         let alarmTimeData = try! NSKeyedArchiver.archivedData(withRootObject: alarmTimes,
                                                               requiringSecureCoding: false)
         userDefaults.set(alarmTimeData, forKey: timeArrayKey)
-        userDefaults.synchronize()
+//        userDefaults.synchronize()
     }
     
     @IBAction private func addButtonDidTapped(_ sender: Any) {
@@ -83,15 +84,13 @@ final class AlarmViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showAlarmAddSegueID{
-            guard let nvc = segue.destination as? UINavigationController,
-                  let alarmAddVC = nvc.topViewController as? AlarmAddViewController else { return }
-            // MARK: - ToDo コメントアウト解除
-            //            alarmAddVC.delegate = self
-            //            alarmAddVC.isEdit = tableView.isEditing
-            //            if tableView.isEditing {
-            //                alarmAddVC.alarmTime = alarmTimes[index]
-            //            }
+        if segue.identifier == showAlarmAddSegueID {
+            guard let alarmAddVC = segue.destination as? AlarmAddViewController else { return }
+            alarmAddVC.delegate = self
+            alarmAddVC.isEdit = tableView.isEditing
+            if tableView.isEditing {
+                alarmAddVC.alarmTime = alarmTimes[index]
+            }
         }
     }
     
@@ -145,4 +144,29 @@ extension AlarmViewController: UITableViewDataSource {
     
 }
 
-// MARK: - ToDo AlarmAddVCDelegate実装
+extension AlarmViewController: AlarmAddVCDelegate {
+    
+    func alarmAddVC(alarmAdded: AlarmAddViewController, alarmTime: AlarmTime) {
+        if tableView.isEditing {
+            alarmTimes[index] = alarmTime
+        } else {
+            alarmTimes.append(alarmTime)
+        }
+        alarmTimes.sort { $0.date < $1.date }
+        saveDate()
+        setEditing(false, animated: false)
+        tableView.reloadData()
+    }
+    
+    func alarmAddVC(alarmDeleted: AlarmAddViewController, alarmTime: AlarmTime) {
+        setEditing(false, animated: false)
+        alarmTimes.remove(at: index)
+        saveDate()
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarmTimes[index].uuidString])
+    }
+    
+    func alarmAddVC(alarmCanceled: AlarmAddViewController) {
+        setEditing(false, animated: false)
+    }
+    
+}

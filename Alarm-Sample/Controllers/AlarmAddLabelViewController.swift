@@ -21,12 +21,16 @@ final class AlarmAddLabelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTextField()
+        
+    }
+    
+    private func setupTextField() {
         textField.clearButtonMode = .always
         textField.returnKeyType = .done
         textField.delegate = self
         textField.becomeFirstResponder()
         textField.text = text ?? ""
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {

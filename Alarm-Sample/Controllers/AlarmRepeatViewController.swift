@@ -33,7 +33,7 @@ final class AlarmRepeatViewController: UIViewController {
         
     }
     
-    private func sort(_ selectDays: [String]) ->  [String] {
+    private func sort(_ selectDays: [String]) -> [String] {
         let weeks = DateFormatter().weekdaySymbols!
         var dayDictionary = [String: Int]()
         for i in 0..<weeks.count {

@@ -12,6 +12,11 @@ final class AlarmTimeTableViewCell: UITableViewCell {
     @IBOutlet private weak var timeLabel: UILabel!
     @IBOutlet private weak var repeatingLabel: UILabel!
     @IBOutlet private weak var mySwitch: UISwitch!
+    var onTapEvent: (() -> Void)?
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        onTapEvent?()
+    }
     
     func configure(alarmTime: AlarmTime) {
         timeLabel.text = TimeManager().toString(from: alarmTime.date)

@@ -9,9 +9,7 @@ import Foundation
 
 extension Notification.Name {
     
-    static var notificationIdentifier: Self {
-        return Notification.Name("NotificationIdentifier")
-    }
+    static let notificationIdentifier = Notification.Name("NotificationIdentifier")
     
 }
 

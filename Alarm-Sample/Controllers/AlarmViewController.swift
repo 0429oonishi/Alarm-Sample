@@ -13,8 +13,6 @@ final class AlarmViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     
     static let shared = AlarmViewController()
-    private var appDelegate = UIApplication.shared
-    private var userDefaults = UserDefaults.standard
     private var index: Int!
     private var alarmTimes = [AlarmTime]()
     private let showAlarmAddSegueID = "ShowAlarmAddSegueID"
@@ -56,7 +54,7 @@ final class AlarmViewController: UIViewController {
     }
     
     private func timeLoad() {
-        if let timeData = userDefaults.object(forKey: timeArrayKey) as? Data,
+        if let timeData = UserDefaults.standard.object(forKey: timeArrayKey) as? Data,
            let getTimes = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(timeData) as? [AlarmTime] {
             alarmTimes = getTimes
         }
@@ -75,8 +73,7 @@ final class AlarmViewController: UIViewController {
     private func saveDate() {
         let alarmTimeData = try! NSKeyedArchiver.archivedData(withRootObject: alarmTimes,
                                                               requiringSecureCoding: false)
-        userDefaults.set(alarmTimeData, forKey: timeArrayKey)
-//        userDefaults.synchronize()
+        UserDefaults.standard.set(alarmTimeData, forKey: timeArrayKey)
     }
     
     @IBAction private func addButtonDidTapped(_ sender: Any) {
@@ -97,13 +94,6 @@ final class AlarmViewController: UIViewController {
 }
 
 extension AlarmViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.isEditing {
-            index = indexPath.row
-            performSegue(withIdentifier: showAlarmAddSegueID, sender: nil)
-        }
-    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
@@ -126,6 +116,12 @@ extension AlarmViewController: UITableViewDataSource {
         ) as! AlarmTimeTableViewCell
         let alarmTime = alarmTimes[indexPath.row]
         cell.configure(alarmTime: alarmTime)
+        cell.onTapEvent = { [weak self] in
+            if !tableView.isEditing {
+                self?.index = indexPath.row
+                // MARK: - ToDo 編集画面に遷移
+            }
+        }
         return cell
     }
     

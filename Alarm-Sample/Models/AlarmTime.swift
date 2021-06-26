@@ -21,12 +21,12 @@ final class AlarmTime: NSObject, NSCoding {
     override init() {
         self.date = Date()
         self.uuidString = UUID().uuidString
-        self.label = "Alarm"
+        self.label = "アラーム"
         self.sound = true
         self.snooze = true
         self.onOff = true
         self.weeks = []
-        self.repeatLabel = "Never"
+        self.repeatLabel = "しない"
     }
     
     func encode(with aCoder: NSCoder) {

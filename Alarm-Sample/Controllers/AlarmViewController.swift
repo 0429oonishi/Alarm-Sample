@@ -33,7 +33,7 @@ final class AlarmViewController: UIViewController {
     
     private func setupTableView() {
         tableView.allowsSelectionDuringEditing = true
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         tableView.register(AlarmTimeTableViewCell.nib,
                            forCellReuseIdentifier: AlarmTimeTableViewCell.identifier)
         tableView.delegate = self
@@ -95,6 +95,13 @@ final class AlarmViewController: UIViewController {
 
 extension AlarmViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !tableView.isEditing {
+            index = indexPath.row
+            // MARK: - ToDo 編集画面に遷移
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
@@ -116,12 +123,6 @@ extension AlarmViewController: UITableViewDataSource {
         ) as! AlarmTimeTableViewCell
         let alarmTime = alarmTimes[indexPath.row]
         cell.configure(alarmTime: alarmTime)
-        cell.onTapEvent = { [weak self] in
-            if !tableView.isEditing {
-                self?.index = indexPath.row
-                // MARK: - ToDo 編集画面に遷移
-            }
-        }
         return cell
     }
     

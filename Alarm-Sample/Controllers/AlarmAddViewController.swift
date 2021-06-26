@@ -85,10 +85,10 @@ final class AlarmAddViewController: UIViewController {
     }
     
     private func setAlarm() {
-        removeAlarm(identifiers: alarmTime.uuidString)
+        removeAlarm(identifier: alarmTime.uuidString)
         let weekDays = DateFormatter().shortWeekdaySymbols!
         for weekDay in weekDays {
-            removeAlarm(identifiers: alarmTime.uuidString + weekDay)
+            removeAlarm(identifier: alarmTime.uuidString + weekDay)
         }
         if alarmTime.weeks.isEmpty {
             setCategories()
@@ -101,33 +101,28 @@ final class AlarmAddViewController: UIViewController {
         }
     }
     
-    private func removeAlarm(identifiers: String) {
+    private func removeAlarm(identifier: String) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(
-            withIdentifiers: [identifiers]
+            withIdentifiers: [identifier]
         )
     }
     
     private func setCategories() {
-        let snoozeAction = UNNotificationAction(
-            identifier: "snooze",
-            title: "Snooze 5 Minutes",
-            options: []
-        )
-        let noAction = UNNotificationAction(
-            identifier: "stop",
-            title: "stop",
-            options: []
-        )
-        let actions = alarmTime.snooze ? [snoozeAction, noAction] : []
-        let alarmCategory = UNNotificationCategory(
-            identifier: "alarmCategory",
-            actions: actions,
-            intentIdentifiers: [],
-            options: [])
+        let snoozeAction = UNNotificationAction(identifier: "snooze",
+                                                title: "5分後に再通知",
+                                                options: [])
+        let stopAction = UNNotificationAction(identifier: "stop",
+                                              title: "ストップ",
+                                              options: [])
+        let actions = alarmTime.snooze ? [snoozeAction, stopAction] : []
+        let alarmCategory = UNNotificationCategory(identifier: "alarmCategory",
+                                                   actions: actions,
+                                                   intentIdentifiers: [],
+                                                   options: [])
         UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
     }
     
-    private func setNotificationContent(day:String, repeats:Bool){
+    private func setNotificationContent(day: String, repeats: Bool) {
         let content = UNMutableNotificationContent()
         content.title = alarmTime.label
         content.sound = .default
@@ -143,11 +138,7 @@ final class AlarmAddViewController: UIViewController {
                                             content: content,
                                             trigger: trigger)
         
-        UNUserNotificationCenter.current().add(request) { (error) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
+        UNUserNotificationCenter.current().add(request)
         alarmTime.date = datePicker.date
     }
     
@@ -205,8 +196,8 @@ extension AlarmAddViewController: UITableViewDataSource {
             case (0, 0...2):
                 let cell = tableView.dequeueReusableCell(withIdentifier: AlarmAddTableViewCell.identifier,
                                                          for: indexPath) as! AlarmAddTableViewCell
-                let titles = ["Repeat", "Label", "Sound"]
-                let subTitles = [alarmTime.repeatLabel, alarmTime.label, "Default"]
+                let titles = ["リピート", "ラベル", "サウンド"]
+                let subTitles = [alarmTime.repeatLabel, alarmTime.label, "デフォルト"]
                 cell.configure(title: titles[indexPath.row], subTitle: subTitles[indexPath.row])
                 if indexPath.row == 2 { cell.selectionStyle = .none }
                 return cell
@@ -214,7 +205,7 @@ extension AlarmAddViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: AlarmSnoozeTableViewCell.identifier,
                                                          for: indexPath) as! AlarmSnoozeTableViewCell
                 cell.delegate = self
-                cell.configure(text: "Snooze", isOn: alarmTime.snooze)
+                cell.configure(text: "スヌーズ", isOn: alarmTime.snooze)
                 return cell
             case (1, _):
                 let cell = tableView.dequeueReusableCell(withIdentifier: AlarmDeleteTableViewCell.identifier,
@@ -239,17 +230,18 @@ extension AlarmAddViewController: AlarmRepeatVCDelegate {
         alarmTime.repeatLabel = ""
         alarmTime.weeks += weeks
         if alarmTime.weeks.count == 1 {
-            alarmTime.repeatLabel = "Every" + alarmTime.weeks[0]
+            alarmTime.repeatLabel = alarmTime.weeks[0]
         } else if alarmTime.weeks.isEmpty {
-            alarmTime.repeatLabel = "Never"
+            alarmTime.repeatLabel = "しない"
         } else if alarmTime.weeks.count == 7 {
-            alarmTime.repeatLabel = "Every day"
+            alarmTime.repeatLabel = "毎日"
         } else {
             for week in alarmTime.weeks {
                 if alarmTime.repeatLabel != "" {
                     alarmTime.repeatLabel += ", "
                 }
-                alarmTime.repeatLabel += week
+                let text = week.replacingOccurrences(of: "曜日", with: "")
+                alarmTime.repeatLabel += text
             }
         }
         tableView.reloadData()

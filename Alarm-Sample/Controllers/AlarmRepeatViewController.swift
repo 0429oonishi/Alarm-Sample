@@ -7,6 +7,16 @@
 
 import UIKit
 
+enum Week: String, CaseIterable {
+    case sunday = "日曜日"
+    case monday = "月曜日"
+    case tuesday = "火曜日"
+    case wednesday = "水曜日"
+    case thursday = "木曜日"
+    case friday = "金曜日"
+    case saturday = "土曜日"
+}
+
 protocol AlarmRepeatVCDelegate: AnyObject {
     func alarmRepeatVC(addRepeat: AlarmRepeatViewController, weeks: [String])
 }
@@ -16,7 +26,7 @@ final class AlarmRepeatViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     
     weak var delegate: AlarmRepeatVCDelegate?
-    private var weeks = DateFormatter().weekdaySymbols!
+    private var weeks = Week.allCases.map { $0.rawValue }
     var selectedDays = [String]()
     
     override func viewDidLoad() {
@@ -34,7 +44,6 @@ final class AlarmRepeatViewController: UIViewController {
     }
     
     private func sort(_ selectDays: [String]) -> [String] {
-        let weeks = DateFormatter().weekdaySymbols!
         var dayDictionary = [String: Int]()
         for i in 0..<weeks.count {
             dayDictionary[weeks[i]] = i
@@ -58,7 +67,9 @@ extension AlarmRepeatViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.accessoryType = .checkmark
-        selectedDays.append(weeks[indexPath.row])
+        if !selectedDays.contains(weeks[indexPath.row]) {
+            selectedDays.append(weeks[indexPath.row])
+        }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -77,9 +88,13 @@ extension AlarmRepeatViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AlarmRepeatVCCellID", for: indexPath)
-        cell.textLabel!.text = "Every" + weeks[indexPath.row]
+        cell.textLabel!.text = "毎" + weeks[indexPath.row]
         cell.selectionStyle = .none
-        selectedDays.forEach { cell.accessoryType = (weeks[indexPath.row] == $0) ? .checkmark : .none }
+        selectedDays.forEach {
+            if weeks[indexPath.row] == $0 {
+                cell.accessoryType = .checkmark
+            }
+        }
         return cell
     }
     

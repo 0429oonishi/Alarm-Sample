@@ -16,21 +16,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // 通知許可の取得
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
             if granted {
                 UNUserNotificationCenter.current().delegate = self
             }
         }
+        
         return true
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        UNUserNotificationCenter.current().getDeliveredNotifications { (notifications: [UNNotification]) in
+        // バックグラウンドからアクティブ状態への移行した時に呼び出される。
+        // バックグラウンドに入るときに行われた変更の多くを元に戻すことが可能
+        UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
             for notification in notifications {
                 AlarmViewController.shared.getAlarm(from: notification.request.identifier)
                 NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: nil)
             }
         }
+        
     }
     
     // MARK: UISceneSession Lifecycle
@@ -70,24 +75,20 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let identifier = response.actionIdentifier
         if identifier == "snooze" {
-            let snoozeAction = UNNotificationAction(identifier: identifier, title: "Snooze 5 Minutes", options: [])
-            let noAction = UNNotificationAction(identifier: "stop", title: "stop", options: [])
+            let snoozeAction = UNNotificationAction(identifier: "snooze", title: "5分後に再通知", options: [])
+            let stopAction = UNNotificationAction(identifier: "stop", title: "ストップ", options: [])
             let alarmCategory = UNNotificationCategory(identifier: "alarmCategory",
-                                                       actions: [snoozeAction, noAction],
+                                                       actions: [snoozeAction, stopAction],
                                                        intentIdentifiers: [],
                                                        options: [])
             UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
             let content = UNMutableNotificationContent()
-            content.title = "Snooze"
-            content.sound = UNNotificationSound.default
+            content.title = "スヌーズ"
+            content.sound = .default
             content.categoryIdentifier = "alarmCategory"
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
             let request = UNNotificationRequest(identifier: "Snooze", content: content, trigger: trigger)
-            UNUserNotificationCenter.current().add(request) { error in
-                if let error = error {
-                    fatalError("\(error)")
-                }
-            }
+            UNUserNotificationCenter.current().add(request)
         }
         let uuid = response.notification.request.identifier
         AlarmViewController.shared.getAlarm(from: uuid)

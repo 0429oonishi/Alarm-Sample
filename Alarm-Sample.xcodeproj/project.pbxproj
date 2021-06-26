@@ -13,7 +13,7 @@
 		AB1541CA2676E57F006E30A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB1541C82676E57F006E30A6 /* LaunchScreen.storyboard */; };
 		AB1541D22676EE64006E30A6 /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1541D12676EE64006E30A6 /* AlarmViewController.swift */; };
 		AB1541D42676EE68006E30A6 /* Alarm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB1541D32676EE68006E30A6 /* Alarm.storyboard */; };
-		AB1541D62676F033006E30A6 /* AlarmTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1541D52676F033006E30A6 /* AlarmTimes.swift */; };
+		AB1541D62676F033006E30A6 /* AlarmTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1541D52676F033006E30A6 /* AlarmTime.swift */; };
 		AB1541DB2676F0CD006E30A6 /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1541DA2676F0CD006E30A6 /* NotificationName+Extension.swift */; };
 		AB1541DE2676F106006E30A6 /* AlarmTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1541DC2676F106006E30A6 /* AlarmTimeTableViewCell.swift */; };
 		AB1541DF2676F106006E30A6 /* AlarmTimeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB1541DD2676F106006E30A6 /* AlarmTimeTableViewCell.xib */; };
@@ -39,7 +39,7 @@
 		AB1541CB2676E57F006E30A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB1541D12676EE64006E30A6 /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
 		AB1541D32676EE68006E30A6 /* Alarm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alarm.storyboard; sourceTree = "<group>"; };
-		AB1541D52676F033006E30A6 /* AlarmTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTimes.swift; sourceTree = "<group>"; };
+		AB1541D52676F033006E30A6 /* AlarmTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTime.swift; sourceTree = "<group>"; };
 		AB1541DA2676F0CD006E30A6 /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extension.swift"; sourceTree = "<group>"; };
 		AB1541DC2676F106006E30A6 /* AlarmTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTimeTableViewCell.swift; sourceTree = "<group>"; };
 		AB1541DD2676F106006E30A6 /* AlarmTimeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmTimeTableViewCell.xib; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 		AB1541D92676F04D006E30A6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AB1541D52676F033006E30A6 /* AlarmTimes.swift */,
+				AB1541D52676F033006E30A6 /* AlarmTime.swift */,
 				AB1541E22676FD79006E30A6 /* TimeManageer.swift */,
 			);
 			path = Models;
@@ -223,7 +223,7 @@
 				AB1541C02676E57B006E30A6 /* SceneDelegate.swift in Sources */,
 				AB1541FB26771CB1006E30A6 /* AlarmAddLabelViewController.swift in Sources */,
 				AB1541DE2676F106006E30A6 /* AlarmTimeTableViewCell.swift in Sources */,
-				AB1541D62676F033006E30A6 /* AlarmTimes.swift in Sources */,
+				AB1541D62676F033006E30A6 /* AlarmTime.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

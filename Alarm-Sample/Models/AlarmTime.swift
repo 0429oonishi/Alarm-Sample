@@ -14,7 +14,7 @@ final class AlarmTime: NSObject, NSCoding {
     var label: String
     var sound: Bool
     var snooze: Bool
-    var onOff: Bool
+    var isOn: Bool
     var weeks: [String]
     var repeatLabel: String
     
@@ -24,7 +24,7 @@ final class AlarmTime: NSObject, NSCoding {
         self.label = "アラーム"
         self.sound = true
         self.snooze = true
-        self.onOff = true
+        self.isOn = true
         self.weeks = []
         self.repeatLabel = "しない"
     }
@@ -35,7 +35,7 @@ final class AlarmTime: NSObject, NSCoding {
         aCoder.encode(self.label, forKey: "label")
         aCoder.encode(self.sound, forKey: "sound")
         aCoder.encode(self.snooze, forKey: "snooze")
-        aCoder.encode(self.onOff, forKey: "onOff")
+        aCoder.encode(self.isOn, forKey: "isOn")
         aCoder.encode(self.weeks, forKey: "weeks")
         aCoder.encode(self.repeatLabel, forKey: "repeatLabel")
     }
@@ -46,7 +46,7 @@ final class AlarmTime: NSObject, NSCoding {
         label = aDecoder.decodeObject(forKey: "label") as! String
         sound = aDecoder.decodeBool(forKey: "sound")
         snooze = aDecoder.decodeBool(forKey: "snooze")
-        onOff = aDecoder.decodeBool(forKey: "onOff")
+        isOn = aDecoder.decodeBool(forKey: "isOn")
         weeks = aDecoder.decodeObject(forKey: "weeks") as! [String]
         repeatLabel = aDecoder.decodeObject(forKey: "repeatLabel") as! String
     }

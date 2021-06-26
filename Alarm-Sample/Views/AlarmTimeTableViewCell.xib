@@ -37,6 +37,9 @@
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6gk-k5-NID">
                         <rect key="frame" x="196" y="30" width="51" height="31"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <connections>
+                            <action selector="mySwitchDidTapped:" destination="KGk-i7-Jjw" eventType="valueChanged" id="hzd-pw-XcY"/>
+                        </connections>
                     </switch>
                 </subviews>
                 <constraints>

@@ -64,13 +64,13 @@ final class AlarmViewController: UIViewController {
         timeLoad()
         guard let alarm = alarmTimes.first(where: { $0.uuidString == uuid }) else { return }
         if alarm.weeks.isEmpty {
-            alarm.onOff = false
+            alarm.isOn = false
         }
-        saveDate()
+        saveData()
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
-    private func saveDate() {
+    private func saveData() {
         let alarmTimeData = try! NSKeyedArchiver.archivedData(withRootObject: alarmTimes,
                                                               requiringSecureCoding: false)
         UserDefaults.standard.set(alarmTimeData, forKey: timeArrayKey)
@@ -122,7 +122,9 @@ extension AlarmViewController: UITableViewDataSource {
             for: indexPath
         ) as! AlarmTimeTableViewCell
         let alarmTime = alarmTimes[indexPath.row]
-        cell.configure(alarmTime: alarmTime)
+        cell.configure(alarmTime: alarmTime) { isOn in
+            alarmTime.isOn = isOn
+        }
         return cell
     }
     
@@ -135,7 +137,7 @@ extension AlarmViewController: UITableViewDataSource {
             )
             alarmTimes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            saveDate()
+            saveData()
         }
     }
     
@@ -150,7 +152,7 @@ extension AlarmViewController: AlarmAddVCDelegate {
             alarmTimes.append(alarmTime)
         }
         alarmTimes.sort { $0.date < $1.date }
-        saveDate()
+        saveData()
         setEditing(false, animated: false)
         tableView.reloadData()
     }
@@ -158,7 +160,7 @@ extension AlarmViewController: AlarmAddVCDelegate {
     func alarmAddVC(alarmDeleted: AlarmAddViewController, alarmTime: AlarmTime) {
         setEditing(false, animated: false)
         alarmTimes.remove(at: index)
-        saveDate()
+        saveData()
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarmTimes[index].uuidString])
     }
     
